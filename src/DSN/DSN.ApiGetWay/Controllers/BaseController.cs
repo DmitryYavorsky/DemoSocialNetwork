@@ -31,6 +31,9 @@ namespace DSN.ApiGetWay.Controllers
 
             return NotFound();
         }
+
         protected Guid UserId => string.IsNullOrWhiteSpace(User?.Identity.Name)
-            ? Guid.Empty : Guid.Parse(User.Identity.Name);
+            ? Guid.Empty
+            : Guid.Parse(User.Identity.Name);
     }
+}

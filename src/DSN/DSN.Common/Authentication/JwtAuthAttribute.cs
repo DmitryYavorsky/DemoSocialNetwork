@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DSN.Common.Authentication
 {
-    class JwtAuthAttribute
+    public class JwtAuthAttribute: AuthAttribute
     {
+        public JwtAuthAttribute(string policy = ""): base(JwtBearerDefaults.AuthenticationScheme,policy)
+        {
+            
+        }
     }
 }
