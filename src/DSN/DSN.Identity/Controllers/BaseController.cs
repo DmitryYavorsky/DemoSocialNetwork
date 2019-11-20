@@ -7,31 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DSN.Identity.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
     public abstract class BaseController : ControllerBase
     {
-        public BaseController()
-        {
-            
-        }
+        protected bool IsAdming => User.IsInRole("SomeRole");
 
-        protected IActionResult Single<T>(T model, Func<T, bool> criteria = null)
-        {
-            if (model == null)
-            {
-                return NotFound();
-            }
-
-            var isValid = criteria == null || criteria(model);
-            if (isValid)
-            {
-                return Ok(model);
-            }
-
-            return NotFound();
-        }
-        protected Guid UserId => string.IsNullOrWhiteSpace(User?.Identity.Name)
-        ?Guid.Empty : Guid.Parse(User.Identity.Name);
+        protected Guid UserId => string.IsNullOrWhiteSpace(User?.Identity?.Name) ? Guid.Empty : Guid.Parse(User.Identity.Name);
     }
 }
