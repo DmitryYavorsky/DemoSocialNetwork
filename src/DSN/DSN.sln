@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSN.Identity", "DSN.Identity\DSN.Identity.csproj", "{20C23CE6-6EA9-43A2-A268-D01651736734}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSN.Identity", "DSN.Identity\DSN.Identity.csproj", "{20C23CE6-6EA9-43A2-A268-D01651736734}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DSN-Identity", "DSN-Identity", "{88C48118-BEFC-4804-87CF-0317218B9D7C}"
 EndProject
@@ -15,11 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DSN-Common", "DSN-Common", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4DC0B79A-1F93-4B64-B0DF-F65C452A15EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSN.Common", "DSN.Common\DSN.Common.csproj", "{320C5495-F590-4890-9E63-9D97A1E505C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSN.Common", "DSN.Common\DSN.Common.csproj", "{320C5495-F590-4890-9E63-9D97A1E505C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DSN-ApiGetWay", "DSN-ApiGetWay", "{E4AFBB91-50B0-40ED-8E19-F689DA97E84E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSN.ApiGetWay", "DSN.ApiGetWay\DSN.ApiGetWay.csproj", "{DA41BDB5-6B64-4710-B1B5-FD435D46D1F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSN.ApiGetWay", "DSN.ApiGetWay\DSN.ApiGetWay.csproj", "{DA41BDB5-6B64-4710-B1B5-FD435D46D1F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0CA79249-F16E-4D0E-BA2D-A05BCAAC38BB}"
 EndProject
@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DSN-AccountService", "DSN-A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5CB91FC4-7B5C-4B91-AE25-E47BA1918110}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSN.AccountService", "DSN.AccountService\DSN.AccountService.csproj", "{D3436899-ABEB-4418-910F-17A390D981AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DSN.AccountService", "DSN.AccountService\DSN.AccountService.csproj", "{D3436899-ABEB-4418-910F-17A390D981AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
