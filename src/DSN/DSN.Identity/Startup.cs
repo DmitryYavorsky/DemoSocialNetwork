@@ -35,6 +35,7 @@ namespace DSN.Identity
                 options.AddPolicy("CorsPolicy", cors =>
                     cors.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
+            
             using (var serviceProvider = services.BuildServiceProvider())
             {
                 var service = serviceProvider.GetService<IJwtHandler>();
