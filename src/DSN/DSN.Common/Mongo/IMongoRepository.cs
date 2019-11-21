@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DSN.Common.Mongo
 {
-    public interface IMongoDbInitializer : IInitializer
+    public interface IMongoRepository<TEntity> where TEntity: 
     {
     }
 }

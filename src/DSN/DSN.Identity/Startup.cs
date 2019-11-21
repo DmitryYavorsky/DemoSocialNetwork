@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using DSN.Common.Authentication;
+using DSN.Common.Mongo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +39,11 @@ namespace DSN.Identity
             {
                 var service = serviceProvider.GetService<IJwtHandler>();
             }
+
+            var builder = new ContainerBuilder();
+            builder.Populate(services);
+            builder.AddMongo();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

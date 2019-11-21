@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DSN.Common.Mongo
+namespace DSN.Common.Types
 {
-    public interface IMongoDbInitializer : IInitializer
+    interface IIdentifiable
     {
     }
 }

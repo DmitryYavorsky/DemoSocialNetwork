@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 
 namespace DSN.Common
 {
-    interface IInitializer
+    public interface IInitializer
     {
+        Task InitializeAsync();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Autofac;
 using Microsoft.Extensions.Configuration;
+using MongoDB.Driver;
 
 namespace DSN.Common.Mongo
 {
@@ -11,6 +12,7 @@ namespace DSN.Common.Mongo
         private static readonly string SectionName = "mongo";
         public static void AddMongo(this ContainerBuilder builder)
         {
+
             builder.Register(context =>
             {
                 var configuration = context.Resolve<IConfiguration>();
@@ -18,11 +20,21 @@ namespace DSN.Common.Mongo
                 var options = section.Get<MongoDbOptions>();
                 return options;
             }).SingleInstance();
+
             builder.Register(context =>
             {
                 var mongoOptions = context.Resolve<MongoDbOptions>();
-                return  new 
-            });
+                return new MongoClient(mongoOptions.ConnectionString);
+            }).SingleInstance();
+
+            builder.Register(context =>
+            {
+                var options = context.Resolve<MongoDbOptions>();
+                var mongoClient = context.Resolve<MongoClient>();
+                return mongoClient.GetDatabase(options.Database);
+            }).InstancePerLifetimeScope();
+
+            
         }
     }
 }
