@@ -4,7 +4,8 @@ using System.Text;
 
 namespace DSN.Common.Types
 {
-    interface IIdentifiable
+    public interface IIdentifiable
     {
+        Guid Id { get; }
     }
 }

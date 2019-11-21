@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DSN.Common.Types;
-using Microsoft.AspNetCore.Identity;;
+using Microsoft.AspNetCore.Identity;
 namespace DSN.Identity.Domain
 {
     public class User: IIdentifiable
@@ -26,9 +26,13 @@ namespace DSN.Identity.Domain
         {
             if (string.IsNullOrWhiteSpace(password))
             {
-                
+                throw new DSNException(Codes.InvalidPassword,$"Invalid password: '{Email}'.");
             }
+            PasswordHash = passwordHasher.HashPassword(this, password);
         }
+
+        public bool ValidatePassword(string password, IPasswordHasher<User> passwordHasher)
+            => passwordHasher.VerifyHashedPassword(this, PasswordHash, password) != PasswordVerificationResult.Failed;
     }
     
 }

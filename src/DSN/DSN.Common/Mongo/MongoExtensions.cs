@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Autofac;
+using DSN.Common.Types;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
@@ -34,7 +35,14 @@ namespace DSN.Common.Mongo
                 return mongoClient.GetDatabase(options.Database);
             }).InstancePerLifetimeScope();
 
-            
+            builder.RegisterType<MongoDbInitializer>().As<IMongoDbInitializer>().InstancePerLifetimeScope();
+            builder.RegisterType<MongoDbSeeder>().As<IMongoDbSeeder>().InstancePerLifetimeScope();
+
         }
+
+        public static void AddMongoRepository<TEntity>(this ContainerBuilder builder, string collectionName)
+            where TEntity : IIdentifiable
+            => builder.Register(ctx => new MongoRepository<TEntity>(ctx.Resolve<IMongoDatabase>(), collectionName))
+                .As<IMongoRepository<TEntity>>().InstancePerLifetimeScope(); 
     }
 }
