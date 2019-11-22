@@ -6,6 +6,9 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using DSN.Common.Authentication;
 using DSN.Common.Mongo;
+using DSN.Common.Mvc;
+using DSN.Common.Swagger;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +31,8 @@ namespace DSN.Identity
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCustomMvc().AddFluentValidation();
+            //services.AddSwaggerDocs();
             services.AddControllers();
             services.AddJwt();
             services.AddCors(options =>
@@ -36,11 +41,6 @@ namespace DSN.Identity
                     cors.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
             
-            using (var serviceProvider = services.BuildServiceProvider())
-            {
-                var service = serviceProvider.GetService<IJwtHandler>();
-            }
-
             var builder = new ContainerBuilder();
             builder.Populate(services);
             builder.AddMongo();
@@ -57,7 +57,8 @@ namespace DSN.Identity
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
-            app.UseAuthorization();
+            //app.UseSwaggerDocs();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

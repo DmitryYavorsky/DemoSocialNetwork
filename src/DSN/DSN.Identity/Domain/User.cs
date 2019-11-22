@@ -8,6 +8,7 @@ namespace DSN.Identity.Domain
 {
     public class User: IIdentifiable
     {
+        
         public Guid Id { get; private set; }
         public string Email { get; private set; }
         public string Role { get; private set; }
