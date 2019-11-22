@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DSN.Common.Authentication;
 using DSN.Identity.Messages.Commands;
 using DSN.Identity.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DSN.Identity.Controllers
@@ -24,10 +20,8 @@ namespace DSN.Identity.Controllers
         public IActionResult Get() => Content($"Your id is {UserId}.");
 
         [HttpPost("sign-in")]
-        public async Task<IActionResult> SignIn()
-        {
-            return NoContent();
-        }
+        public async Task<IActionResult> SignIn(SignIn command)
+            => Ok(await _identityService.SignInAsync(command.Email, command.Password));
 
         [HttpPost("sign-up")]
         public async Task<IActionResult> SignUp(SignUp command)

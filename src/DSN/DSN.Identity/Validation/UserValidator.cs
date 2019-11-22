@@ -17,6 +17,7 @@ namespace DSN.Identity.Validation
             RuleFor(x => x.Email).EmailAddress().WithErrorCode(Codes.InvalidEmail);
             RuleFor(x => x.CreatedAt).NotNull();
             RuleFor(x => x.UpdatedAt).NotNull();
+            RuleFor(x => x.Role).NotNull().NotEmpty();
         }
     }
 }

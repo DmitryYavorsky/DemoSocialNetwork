@@ -20,6 +20,7 @@ namespace DSN.Identity.Domain
         {
             Id = id;
             Email = email.ToLowerInvariant();
+            Role = role;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
         }

@@ -17,7 +17,6 @@ namespace DSN.Common.Types
         {
             Code = code;
         }
-
         public DSNException(string message, params object[] args)
             : this(string.Empty, message, args)
         {

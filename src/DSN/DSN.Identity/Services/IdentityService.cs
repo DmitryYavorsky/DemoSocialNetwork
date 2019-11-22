@@ -6,6 +6,7 @@ using DSN.Common.Authentication;
 using DSN.Common.Types;
 using DSN.Identity.Domain;
 using DSN.Identity.Repositories;
+using DSN.Identity.Validation;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -38,6 +39,12 @@ namespace DSN.Identity.Services
             }
             user = new User(id,email,role);
             user.SetPassword(password,_passwordHasher);
+            var validator = new UserValidator();
+            var valid = await validator.ValidateAsync(user);
+            if (!valid.IsValid)
+            {
+                throw new DSNException("User is invalid");
+            }
             await _userRepository.AddAsync(user);
 
         }

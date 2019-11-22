@@ -22,7 +22,7 @@ namespace DSN.Common.Mvc
             return services.AddMvcCore()
                 .AddApiExplorer()
                 .AddDataAnnotations()
-                .AddAuthorization();
+                .AddAuthorization().AddDefaultJsonOptions();
         }
 
         public static IMvcCoreBuilder AddDefaultJsonOptions(this IMvcCoreBuilder builder)
