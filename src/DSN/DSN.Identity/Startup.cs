@@ -37,7 +37,7 @@ namespace DSN.Identity
         {
             services.AddCustomMvc().AddFluentValidation();
             //services.AddSwaggerDocs();
-            services.AddControllers();
+            
             services.AddJwt();
             services.AddCors(options =>
             {
@@ -66,8 +66,11 @@ namespace DSN.Identity
             app.UseRouting();
             app.UseCors("CorsPolicy");
             //app.UseSwaggerDocs();
+            app.UseErrorHandler();
             app.UseAuthentication();
-
+            app.UseAuthorization();
+            app.UseAccessTokenValidator();
+            //app.UseMvc();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

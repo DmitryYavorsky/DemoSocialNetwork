@@ -1,6 +1,6 @@
 @apiUrl = http://localhost:5000
 @identityServiceUrl = http://localhost:5002
-@accessToken = xxxxxxxxxxxxxxxxxx
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjODBlMjExMTlhYTE0ODYxOWZkMzkxYjZiYjNjMmVhNSIsInVuaXF1ZV9uYW1lIjoiYzgwZTIxMTE5YWExNDg2MTlmZDM5MWI2YmIzYzJlYTUiLCJqdGkiOiI1MjkyYTljNy02M2Q0LTRlMzMtOWI1MS0wMGMwNWQ2MjQzMDkiLCJpYXQiOiIxNTc0NjgzMzM2ODMyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJuYmYiOjE1NzQ2ODMzMzYsImV4cCI6MTU3NDY4NTEzNiwiaXNzIjoiZHNuLWlkZW50aXR5LXNlcnZpY2UifQ.X4OdosAUPuoQp0Iq30Cze4e3Cw-kTkQB5qaqms0pUPA
 @refreshToken = xxxxxxxxxxxxxxxxxx
 @operationId = xxxxxxxxxxxxxxxxxx
 @productId = xxxxxxxxxxxxxxxxxx
@@ -25,6 +25,9 @@ content-type: application/json
 	"role": "admin"
 }
 
+### Me
+GET {{identityServiceUrl}}/me
+authorization: Bearer {{accessToken}}
 ### Sign in as admin
 POST {{identityServiceUrl}}/sign-in
 content-type: application/json
