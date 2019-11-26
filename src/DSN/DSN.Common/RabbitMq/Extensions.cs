@@ -36,7 +36,7 @@ namespace DSN.Common.RabbitMq
             builder.RegisterAssemblyTypes(assembly).AsClosedTypesOf(typeof(ICommandHandler<>)).InstancePerDependency();
             builder.RegisterType<Handler>().As<IHandler>().InstancePerDependency();
             builder.RegisterType<BusPublisher>().As<IBusPublisher>().InstancePerDependency();
-            //builder.RegisterInstance()
+         
 
         }
 
