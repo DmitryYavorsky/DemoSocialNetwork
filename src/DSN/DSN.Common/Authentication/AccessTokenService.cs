@@ -18,9 +18,9 @@ namespace DSN.Common.Authentication
             _options = options;
             _httpContextAccessor = httpContextAccessor;
         }
-        public Task<bool> IsCurrentActiveToken()
+        public async Task<bool> IsCurrentActiveToken()
         {
-            throw new NotImplementedException();
+             return await Task.FromResult(true);
         }
 
         public Task DeactivateCurrentAsync(string userId)
