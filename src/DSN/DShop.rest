@@ -38,21 +38,17 @@ content-type: application/json
 
 # ================= API GATEWAY ======================= #
 
-### Create as many unique (by name) products as needed
-POST {{apiUrl}}/products
-authorization: Bearer {{accessToken}}
+### Create account
+POST {{apiUrl}}/accounts
+# authorization: Bearer {{accessToken}}
 content-type: application/json
 
 {
-	"name": "My product",
-	"description": "My product description",
-	"vendor": "My company",
-	"price": 2000,
-	"quantity": 10
+	"email" : "somemail@mail.com"
 }
 
 ### Get products list
-GET {{apiUrl}}/products
+GET {{apiUrl}}/accounts
 
 ### Get product details by updating @productId parameter above
 GET {{apiUrl}}/products/{{productId}}

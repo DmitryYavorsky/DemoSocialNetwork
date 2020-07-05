@@ -26,6 +26,9 @@ namespace DSN.Common.Mongo
 
         public async Task AddAsync(TEntity entity)
             => await Collection.InsertOneAsync(entity);
-        
+
+        public async Task UpdateAsync(TEntity entity)
+            => await Collection.ReplaceOneAsync(e => e.Id == entity.Id, entity);
+
     }
 }

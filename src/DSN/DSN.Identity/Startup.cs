@@ -1,24 +1,18 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using DSN.Common.Authentication;
 using DSN.Common.Mongo;
 using DSN.Common.Mvc;
-using DSN.Common.Swagger;
 using DSN.Identity.Domain;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using IApplicationLifetime = Microsoft.AspNetCore.Hosting.IApplicationLifetime;
 
 namespace DSN.Identity
@@ -49,6 +43,7 @@ namespace DSN.Identity
             builder.RegisterAssemblyTypes(Assembly.GetEntryAssembly()).AsImplementedInterfaces();
             builder.Populate(services);
             builder.AddMongo();
+            
             builder.AddMongoRepository<User>("Users");
             builder.RegisterType<PasswordHasher<User>>().As<IPasswordHasher<User>>();
             Container = builder.Build();

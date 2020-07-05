@@ -1,14 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using MediatR;
+using DSN.Common.Mongo;
+using System.Reflection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using DSN.AccountService.Domain;
+using System;
+using DSN.Common.Mvc;
+using DSN.Common.RabbitMq;
+using DSN.AccountService.Messages.Events;
 
 namespace DSN.AccountService
 {
@@ -21,10 +25,29 @@ namespace DSN.AccountService
 
         public IConfiguration Configuration { get; }
 
+        public IContainer Container { get; private set; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddCustomMvc();
             services.AddControllers();
+            //services.AddJwt();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", cors =>
+                    cors.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+            var builder = new ContainerBuilder();
+            builder.Populate(services);
+            builder.AddMongo();
+            builder.AddMongoRepository<Account>("Accounts");
+            builder.AddRabbitMq();
+            builder.RegisterAssemblyTypes(Assembly.GetEntryAssembly()).AsImplementedInterfaces();
+            Container = builder.Build();
+            return new AutofacServiceProvider(Container);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,8 +59,8 @@ namespace DSN.AccountService
             }
 
             app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseRabbitMq().SubscribeEvent<SignedUp>(@namespace: "identity");
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

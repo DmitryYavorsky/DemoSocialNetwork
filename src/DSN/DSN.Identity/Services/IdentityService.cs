@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DSN.Identity.Services
 {
-    public class IdentityService: IIdentityService
+    public class IdentityService : IIdentityService
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher<User> _passwordHasher;
@@ -20,9 +20,9 @@ namespace DSN.Identity.Services
         private readonly IJwtHandler _jwtHandler;
         public IdentityService(IUserRepository userRepository, IPasswordHasher<User> passwordHasher, IClaimsProvider claimsProvider, IJwtHandler jwtHandler)
         {
-            _passwordHasher = passwordHasher?? throw new ArgumentNullException(nameof(passwordHasher));
+            _passwordHasher = passwordHasher ?? throw new ArgumentNullException(nameof(passwordHasher));
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
-            _claimsProvider = claimsProvider?? throw new ArgumentNullException(nameof(claimsProvider));
+            _claimsProvider = claimsProvider ?? throw new ArgumentNullException(nameof(claimsProvider));
             _jwtHandler = jwtHandler ?? throw new ArgumentNullException(nameof(jwtHandler));
         }
         public async Task SignUpAsync(Guid id, string email, string password, string role = Role.User)
@@ -37,8 +37,8 @@ namespace DSN.Identity.Services
             {
                 role = Role.User;
             }
-            user = new User(id,email,role);
-            user.SetPassword(password,_passwordHasher);
+            user = new User(id, email, role);
+            user.SetPassword(password, _passwordHasher);
             var validator = new UserValidator();
             var valid = await validator.ValidateAsync(user);
             if (!valid.IsValid)
@@ -56,10 +56,10 @@ namespace DSN.Identity.Services
             {
                 throw new DSNException(Codes.InvalidCredentials, "Invalid credentials");
             }
-            var refreshToken = new RefreshToken(user,_passwordHasher);
+            var refreshToken = new RefreshToken(user, _passwordHasher);
             var claims = await _claimsProvider.GetAsync(user.Id);
             var jwt = _jwtHandler.CreateToken(user.Id.ToString("N"), user.Role, claims);
-            //jwt.RefreshToken = refreshToken.Token;
+            jwt.RefreshToken = refreshToken.Token;
             //Add refresh token after
             return jwt;
         }

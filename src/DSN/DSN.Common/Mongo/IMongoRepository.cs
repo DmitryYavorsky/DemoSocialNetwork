@@ -12,5 +12,7 @@ namespace DSN.Common.Mongo
         Task<TEntity> GetAsync(Guid id);
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate);
         Task AddAsync(TEntity entity);
+        Task UpdateAsync(TEntity entity);
+        
     }
 }

@@ -25,6 +25,6 @@ namespace DSN.Identity.Repositories
             => await _repository.AddAsync(user);
 
         public async Task UpdateAsync(User user)
-            => throw new NotImplementedException();
+            => await _repository.UpdateAsync(user);
     }
 }
